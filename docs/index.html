@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1,maximum-scale=1, minimum-scale=1" />
+  <link rel="shortcut icon" href="https://www.wondershare.com/favicon.ico"
+    mce_href="https://www.wondershare.com/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://neveragain.allstatics.com/2019/assets/style/bootstrap-wondershare.min.css">
+
+  <link rel="stylesheet" href="https://www.wondershare.com/assets/global.min.css">
+  <title>Homepage</title>
+
+  <style>
+    :root {
+      --gradient-deg: 270deg;
+      --btngradient-deg1: 270deg;
+      --btngradient-deg2: 90deg;
+    }
+    .btn-gradient {
+      display: inline-block;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 1rem 2rem;
+      transform-style: preserve-3d;
+      color: #ffffff !important;
+      text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+      position: relative;
+    }
+    .btn-gradient::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      border-radius: 3rem;
+      opacity: .7;
+      transform: translateZ(-1px);
+      transition: border-radius, opacity;
+      transition-duration: .3s, .1s;
+    }
+    .btn-gradient::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 1rem;
+      top: 1rem;
+      border-radius: 3rem;
+      opacity: .6;
+      filter: blur(50px);
+      transform: translateZ(-1px);
+      transition: border-radius;
+      transition-duration: .3s;
+    }
+    .btn-gradient:hover::after {
+      border-radius: 0.5rem;
+      opacity: 1;
+    }
+    .btn-gradient:hover::before {  border-radius: 0.5rem; }
+    .btn-gradient.gradient-1::before {background: linear-gradient(270deg, #00FFFD -10.8%, #EC00FF 51.8%, #FF6700 111.32%), #FFFFFF;}
+    .btn-gradient.gradient-2::before {background: linear-gradient(90deg, #006DFF -6.79%, #FFE782 100%);}
+    .btn-gradient.gradient-3::before {background: linear-gradient(90deg, #00B0FF 0%, #66FF80 97.68%);}
+    .btn-gradient.gradient-1::after {background: linear-gradient(var(--btngradient-deg1), #00FFFD -10.8%, #EC00FF 51.8%, #FF6700 111.32%), #FFFFFF;}
+    .btn-gradient.gradient-2::after {background: linear-gradient(var(--btngradient-deg2), #006DFF -6.79%, #FFE782 100%);}
+    .btn-gradient.gradient-3::after {background: linear-gradient(var(--btngradient-deg2), #00B0FF 0%, #66FF80 97.68%);}
+    
+    .wsc-header2020 .wsc-header2020-navbar-brand>div::before, #slogan-signature { display: none; }
+  </style>
+  <style>
+    .bg-main { 
+      position: relative;
+    }
+    .bg-main::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: calc(100% + (100vw * 9 / 16));
+      min-height: 100vh;
+      left: 0;
+      top: 0;
+      background: linear-gradient(var(--gradient-deg), rgba(0, 255, 253, 0.6) 0%, rgba(236, 0, 255, 0.6) 51.26%, rgba(255, 103, 0, 0.6) 100%);
+    }
+    .embed-responsive-16by9 video {
+      position: absolute;
+      width: 100%;
+      height: auto;
+    }
+    .embed-responsive.expand { overflow: visible; }
+    .embed-responsive.expand video {
+      height: auto !important;
+      right: 0 !important;
+      top: 0 !important;
+      left: auto !important;
+      bottom: auto !important;
+      transition-property: width, height;
+      transition-timing-function: linear;
+      transition-duration: .3s;
+      object-fit: fill;
+    }
+    .clip_video_container {
+      --translate-y: 0; 
+      top: 0; 
+      position: sticky !important;
+      transform: matrix(1,0,0,1,0,var(--translate-y));
+    }
+    .scroll-move-up {
+      --translate-y: 0;
+      --opacity: 1;
+      opacity: var(--opacity); 
+      transform: matrix(1,0,0,1,0,var(--translate-y));
+    }
+    #clip_video{
+      --clip-h: 0;
+      --clip-v: 0;
+      --round: 0;
+      max-width: 2560px;
+      top: 0;
+      left: -200%;
+      right: -200%;
+      top: -200%;
+      bottom: -200%;
+      margin: auto;
+      opacity: 0;
+      transition: clip 50ms, clip-path 50ms;
+      clip-path: inset(var(--clip-v) var(--clip-h) round var(--round));
+      -webkit-clip-path: inset(var(--clip-v) var(--clip-h) round var(--round));
+    }
+    .center-fadein {
+      --translate-y: 0;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      will-change: transform;
+      transition: opacity .3s;
+      transform: matrix(1,0,0,1,0,var(--translate-y));
+    }
+    .center-fadein.show { opacity: 1; }
+    .font-size-96 { 
+      font-size: 24px;
+      line-height: .86em;
+      letter-spacing: -.06em;
+    }
+    .font-size-36 { font-size: 24px; line-height: 1.19; letter-spacing: -.03em; }
+    .fade-in-up { 
+      opacity: 0;
+      transform: translate3d(0, 50%, 0)
+     }
+     .fade-in-up.active { animation: fadeInUp 1s .5s both; }
+     .scroll-fade-in {
+      --translate-y: -50;
+      --opacity: 0;
+       opacity: var(--opacity);
+       transform: matrix(1,0,0,1,0,var(--translate-y));
+       transition-duration: 0ms;
+     }
+     .scroll-fade-in-icons img {
+      --translate-y: -50; 
+      --opacity: 0;
+      opacity: var(--opacity);
+      transform: matrix(1,0,0,1,0,var(--translate-y));
+     }
+     .diff-icons img {
+      width: 32px;
+      }
+     .scroll-fade-in-img {
+      --translate-y: -50;
+      --opacity: 0;
+      --scale: 0.8;
+       opacity: var(--opacity);
+      transform: matrix(var(--scale),0,0,var(--scale),0,var(--translate-y));
+     }
+    @media (min-width: 1280px) {
+      .wsc-header2020.logo-extra .wsc-header202004-navbar-wondershare a.wsc-header2020-navbar-link,
+      .wsc-header2020.logo-extra .wsc-header202004-navbar-wondershare .wsc-header2020-navbar-brand { 
+        height: 64px; 
+        line-height: 64px;
+      }
+      .wsc-header2020.logo-extra .wsc-header2020-navbar-master .wsc-header2020-navbar-brand a {
+        width: 128px;
+        height: 128px;
+      }
+      .font-size-36 { font-size: 36px;}
+      .font-size-xl-extra { font-size: 22px; }
+    }
+    	
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            -webkit-transform: translate3d(0, 50%, 0);
+            transform: translate3d(0, 50%, 0)
+        }
+        to {
+            opacity: 1;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0)
+        }
+    }
+    @media all and (-ms-high-contrast:none),
+    (-ms-high-contrast:active) {
+      .bg-main::before {
+        height: 200vh;
+        background: linear-gradient(270deg, rgba(0, 255, 253, 0.8) 0%, rgba(236, 0, 255, 0.8) 51.26%, rgba(255, 103, 0, 0.8) 100%);
+      }
+      .btn-gradient { border-radius: 50rem; }
+      .btn-gradient.gradient-1{background: linear-gradient(270deg, #00FFFD -10.8%, #EC00FF 51.8%, #FF6700 111.32%), #FFFFFF;}
+      .btn-gradient.gradient-2{background: linear-gradient(90deg, #006DFF -6.79%, #FFE782 100%);}
+      .btn-gradient.gradient-3{background: linear-gradient(90deg, #00B0FF 0%, #66FF80 97.68%);}
+      .btn-gradient::before,.btn-gradient::after { display: none; }
+
+    }
+  </style>
+
+</head>
+
+<body data-pro="wondershare" data-cat="template" data-nav="basic" data-sys="auto" data-dev="auto">
+
+  <header class="wsc-header2020">
+    <nav class="wsc-header2020-navbar-master wsc-header202004-navbar-wondershare">
+      <div class="wsc-header2020-container">
+        <div class="wsc-header2020-navbar-content">
+          <div class="wsc-header2020-navbar-brand"> 
+            <a href="https://www.wondershare.com/"></a>
+            <div><img id="slogan-signature" src="https://images.wondershare.com/WSCOM2021/WOS_SLogan.gif" width="162" alt=""> </div>
+          </div>
+
+          <button class="wsc-header2020-navbar-collapse-toggle" type="button" aria-expanded="false">
+            <svg class="wsc-header2020-navbar-collapse-toggle-icon" width="24" height="24" viewBox="0 0 24 24"
+              fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6H20M20 12L4 12M20 18H4" stroke="white" stroke-width="1.5"></path>
+            </svg>
+            <svg class="wsc-header2020-navbar-collapse-toggle-icon-close" width="24" height="24" viewBox="0 0 24 24"
+              fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 18L12 12M6 6L12 12M18 6L12 12M6 18L12 12" stroke="white" stroke-width="1.5"></path>
+            </svg>
+          </button>
+          <div class="wsc-header2020-navbar-collapse">
+            <ul class="wsc-header2020-navbar-nav active_menu">
+              <li class="wsc-header2020-navbar-item with-toggle">
+                <a class="wsc-header2020-navbar-link active_menu_a"
+                  href="javascript:" >Creativity 
+                  <svg class="ml-2" width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1L6.5 7L1 1" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                  </a>
+                <div class="wsc-header2020-navbar-nav-toggle creativity">
+                  <div class="row no-gutters px-4">
+                    <div class="col-lg-8 py-4-xl pl-lg-2 pr-lg-5 border-control">
+                      <div class="mb-4 font-size-small">Creativity Producs</div>
+                        <a href="#" class="d-flex align-items-center mb-4">
+                          <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/filmora-square.svg" alt="">
+                          <div class="pl-2">
+                            <strong class="text-black">Flimora</strong>
+                            <div class="font-size-small">Intuitive video editing. </div>
+                          </div>
+                        </a>
+                        <a href="#" class="d-flex align-items-center mb-4">
+                          <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/uniconverter-square.svg" alt="">
+                          <div class="pl-2">
+                            <strong class="text-black">UniConverter</strong>
+                            <div class="font-size-small">Simple diagramming. </div>
+                          </div>
+                        </a>
+                        <a href="#" class="d-flex align-items-center mb-4">
+                          <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/democreator-square.svg" alt="">
+                          <div class="pl-2">
+                            <strong class="text-black">DemoCreator</strong>
+                            <div class="font-size-small">Fast prototype creation. </div>
+                          </div>
+                        </a>
+                        <a href="#" class="d-flex align-items-center mb-4">
+                          <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/pixstudio-square.svg" alt="">
+                          <div class="pl-2">
+                            <strong class="text-black">PixStudio</strong>
+                            <div class="font-size-small">Online graphic design. </div>
+                          </div>
+                        </a>
+                        <a href="#" class="d-flex align-items-center mb-4">
+                          <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/filmstock-square.svg" alt="">
+                          <div class="pl-2">
+                            <strong class="text-black">Flimstock</strong>
+                            <div class="font-size-small">Video effects, music, and more. </div>
+                          </div>
+                        </a>
+
+                        <a href="#" class="vap-btn mt-2">View all products</a>
+                    </div>
+                    <div class="col-lg-4 py-4-xl pl-lg-5 pr-lg-2">
+                      <div class="mt-lg-0 my-4 font-size-small">Explore</div>
+                      <ul class="list-unstyled explore">
+                        <li>
+                          <a href="#" class="text-black">Overview</a>
+                        </li>
+                        <li>
+                          <a href="#" class="text-black">Video</a>
+                        </li>
+                        <li>
+                          <a href="#" class="text-black">Photo</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <li class="wsc-header2020-navbar-item with-toggle">
+                <a class="wsc-header2020-navbar-link active_menu_a"
+                  href="javascript:" >Productivity
+                  <svg class="ml-2" width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1L6.5 7L1 1" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </a>
+                <div class="wsc-header2020-navbar-nav-toggle productivity">
+                  <div class="row no-gutters px-4">
+                    <div class="col-lg-8 py-4-xl pl-lg-2 pr-lg-5 border-control">
+                      <div class="mb-4 font-size-small">Productivity Producs</div>
+                        <a href="#" class="d-flex align-items-center mb-4">
+                          <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/pdfelement-square.svg" alt="">
+                          <div class="pl-2">
+                            <strong class="text-black">PDFelement</strong>
+                            <div class="font-size-small">PDF creation and editing.  </div>
+                          </div>
+                        </a>
+                        <a href="#" class="d-flex align-items-center mb-4">
+                          <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/document-cloud-square.svg" alt="">
+                          <div class="pl-2">
+                            <strong class="text-black">Document Cloud</strong>
+                            <div class="font-size-small">Cloud-based document managment. </div>
+                          </div>
+                        </a>
+                        <a href="#" class="d-flex align-items-center mb-4">
+                          <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/edraw-max-square.svg" alt="">
+                          <div class="pl-2">
+                            <strong class="text-black">EdrawMax</strong>
+                            <div class="font-size-small">Cloud-based document managment. </div>
+                          </div>
+                        </a>
+                        <a href="#" class="d-flex align-items-center mb-4">
+                          <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/mockitt-square.svg" alt="">
+                          <div class="pl-2">
+                            <strong class="text-black">Mockitt</strong>
+                            <div class="font-size-small">Cloud-based document managment. </div>
+                          </div>
+                        </a>
+                        <a href="#" class="d-flex align-items-center mb-4">
+                          <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/edraw-mindmaster-square.svg" alt="">
+                          <div class="pl-2">
+                            <strong class="text-black">MindMaster</strong>
+                            <div class="font-size-small">Cloud-based document managment. </div>
+                          </div>
+                        </a>
+
+                        <a href="#" class="vap-btn mt-2">View all products</a>
+                    </div>
+                    <div class="col-lg-4 py-4-xl pl-lg-5 pr-lg-2">
+                      <div class="mt-lg-0 my-4 font-size-small">Explore</div>
+                      <ul class="list-unstyled explore">
+                        <li>
+                          <a href="#" class="text-black">Overview</a>
+                        </li>
+                        <li>
+                          <a href="#" class="text-black">Document</a>
+                        </li>
+                        <li>
+                          <a href="#" class="text-black">Diagram & Design</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="wsc-header2020-navbar-item with-toggle">
+                <a class="wsc-header2020-navbar-link active_menu_a"
+                  href="javascript:" >Utility
+                  <svg class="ml-2" width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 1L6.5 7L1 1" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </a>
+                <div class="wsc-header2020-navbar-nav-toggle utility">
+                  <div class="row no-gutters px-4">
+                    <div class="col-lg-8 py-4-xl pl-lg-2 pr-lg-5 border-control">
+                      <div class="mb-4 font-size-small">Utility Producs</div>
+                        <a href="#" class="d-flex align-items-center mb-4">
+                          <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/recoverit-square.svg" alt="">
+                          <div class="pl-2">
+                            <strong class="text-black">Recoverit</strong>
+                            <div class="font-size-small">Lost file recovery.  </div>
+                          </div>
+                        </a>
+                        <a href="#" class="d-flex align-items-center mb-4">
+                          <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/drfone-square.svg" alt="">
+                          <div class="pl-2">
+                            <strong class="text-black">Dr.fone</strong>
+                            <div class="font-size-small">Mobile device management. </div>
+                          </div>
+                        </a>
+                        <a href="#" class="d-flex align-items-center mb-4">
+                          <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/famisafe-square.svg" alt="">
+                          <div class="pl-2">
+                            <strong class="text-black">Famisafe</strong>
+                            <div class="font-size-small">Parental control and monitoring. </div>
+                          </div>
+                        </a>
+                        <a href="#" class="d-flex align-items-center mb-4">
+                          <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/mobiletrans-square.svg" alt="">
+                          <div class="pl-2">
+                            <strong class="text-black">MobileTrans</strong>
+                            <div class="font-size-small">Mobile data transfers. </div>
+                          </div>
+                        </a>
+                        <a href="#" class="d-flex align-items-center mb-4">
+                          <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/repairit-square.svg" alt="">
+                          <div class="pl-2">
+                            <strong class="text-black">Repairit</strong>
+                            <div class="font-size-small">Corrupt video restoration. </div>
+                          </div>
+                        </a>
+
+                        <a href="#" class="vap-btn mt-2">View all products</a>
+                    </div>
+                    <div class="col-lg-4 py-4-xl pl-lg-5 pr-lg-2">
+                      <div class="mt-lg-0 my-4 font-size-small">Explore</div>
+                      <ul class="list-unstyled explore">
+                        <li>
+                          <a href="#" class="text-black">Overview</a>
+                        </li>
+                        <li>
+                          <a href="#" class="text-black">Video</a>
+                        </li>
+                        <li>
+                          <a href="#" class="text-black">UI&UX</a>
+                        </li>
+                        <li>
+                          <a href="#" class="text-black">Photo</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="wsc-header2020-navbar-item">
+                <a class="wsc-header2020-navbar-link active_menu_a" href="https://support.wondershare.com/">Business</a>
+              </li>
+              <li class="wsc-header2020-navbar-item">
+                <a class="wsc-header2020-navbar-link active_menu_a" href="https://support.wondershare.com/">Support</a>
+              </li>
+              <li class="wsc-header2020-navbar-item">
+                <a class="wsc-header2020-navbar-link active_menu_a" href="https://www.wondershare.com/shop/">shop</a>
+              </li>
+              <li class="wsc-header2020-navbar-item wondershare-user-panel log-out">
+                <a data-href="https://accounts.wondershare.com" data-source="" class="wsc-header2020-navbar-linkBtn login-link" style="background-color: #006dff;color: #fff;font-weight: 600;border-radius: 4px;">Sign in</a>
+              </li>
+              <li class="wsc-header2020-navbar-item wondershare-user-panel log-in" >
+                <img class="avatar" src="https://images.wondershare.com/images2020/avatar-default.png" width="30" height="30" alt="avatar">
+  
+                <div class="ws-user-panel-dropdown" >
+                  <span class="ws-dropdown-item account_name" ></span>
+                  <a class="ws-dropdown-item account_url" >Account Center</a>
+                  <a class="ws-dropdown-item account_url_sign_out" >Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="wsc-main" class="wsc-main px-0" style="overflow-x: visible;">
+    <section class="bg-main">
+      <div class="container text-center text-white mb-lg-0 mb-5 pt-5 " style="position: relative; z-index: 19;">
+        <div class="pt-lg-5 mx-auto scroll-move-up" style="max-width: 689px;">
+          <h1 class="family-inherit">Built for your </h1>
+          <div class="px-5"><img src="https://images.wondershare.com/WSCOM2021/Creative-Future.gif" class="img-fluid" width="452px" alt=""> </div>
+          <p class="font-size-extra py-3" style="font-family: inherit;letter-spacing: -.01em;">Software that empowers you to dream bigger.</p>
+          <a href="#" class="btn-custom white rounded-pill">Discover Creativity Solutions</a>
+        </div>
+      </div>
+    </section>
+    <div class="embed-responsive embed-responsive-16by9 bg-cover clip_video_container">
+      <video id="clip_video" poster="https://cdn.vidyard.com/thumbnails/16624581/lBdQ_T0zNn1mH2t6RxtE5RZoIJmw5hHh.jpg" preload loop muted webkit-playsinline playsinline >
+        <source src="https://cdn.vidyard.com/videos/A5XZYTpc9SR6D5tbmex2Pw/source.mp4?3v11FRc4GX-6gp6jw_Z6ec2eRgdjhnzdGblC1tVchQDhWe2ZlKmT1YhaPZHz2kotIPpRAoN6Jbs44gxG9_utStB7sPjG1z-Py1SP-4htZmSTqw" type="video/mp4">
+      </video>
+      <div class="center-fadein d-flex text-white flex-column justify-content-center align-items-center text-center">
+        <div class="font-size-title-52 font-weight-bold">Make Videos That <br>  <img src="https://images.wondershare.com/WSCOM2021/Imress-white.svg" style="height: 1.75em;" alt="Impress"></div>
+      </div>
+    </div>
+      
+    <div class="padding-control pt-lg-5" style="position: relative;background-color: #ffffff;">
+      <section class="py-5">
+        <div class="py-5 border-radius" style="background: linear-gradient(270deg, rgba(0, 255, 253, 0.2) 0%, rgba(236, 0, 255, 0.2) 51.26%, rgba(255, 103, 0, 0.2) 100%);">
+          <div class="container" id="video-width-control">
+            <div class="row align-items-center py-lg-5">
+              <div class="col-lg-5 order-lg-2 py-3 d-lg-flex justify-content-center">
+                <div class="">
+                  <div class="mb-4 pb-2 mx-n1 scroll-fade-in diff-icons" data-multiple="3">
+                    <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/filmora-square.svg"  class="mx-1" alt="">
+                    <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/filmstock-square.svg"  class="mx-1" alt="">
+                    <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/uniconverter-square.svg"  class="mx-1" alt="">
+                    <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/democreator-square.svg"  class="mx-1" alt="">
+                    <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/demoair-square.svg"  class="mx-1" alt="">
+                  </div>
+                  <div class="scroll-fade-in" data-multiple="2">
+                    <div class="font-size-36 font-weight-bold mb-4">Inspiration <br class="d-xl-inline d-none"> Is Out There</div>
+                    <p class="font-size-large mb-xl-5 mb-4" style="line-height: 1.56;">We provide video solutions for every <br class="d-xl-inline d-none"> skill level, every device, and every <br class="d-xl-inline d-none"> operating system. Record, edit, and get <br class="d-xl-inline d-none"> creative anywhere. </p>
+                  </div>
+                  <div class="scroll-fade-in"><a href="#" class="btn-gradient gradient-1" >Explore Video Solutions</a></div>
+                </div>
+              </div>
+              <div class="col-lg-7 order-lg-1 py-3 scroll-fade-in-img">
+                <div class="position-relative border-radius-video">
+                  <video poster="https://cdn.vidyard.com/thumbnails/16624579/GxaPP79BJQTxqYurE30vAMfEhhkC8nmj.jpg" preload loop muted webkit-playsinline playsinline class="show-to-play" style="max-width: 100%;">
+                    <source src="https://cdn.vidyard.com/videos/wdmuKPs-PU3kq5K-5M1ovQ/source.mp4?6bWkAf7gRDvGkXtn3kGtYaXYZHnfgQsEvXgacm21l5KuspVSCB20y0y-EY270LiAj9gEpEwLeVm4g5VqBoSO45VFoqbsZ2v70EUlO0kC2Nat3Q" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row align-items-center py-lg-5">
+              <div class="col-lg-5 py-3 d-lg-flex justify-content-end">
+                <div class="">
+                  <div class="mb-4 pb-2 mx-n1 scroll-fade-in diff-icons" data-multiple="3">
+                    <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/pixcut-square.svg"  class="mx-1" alt="">
+                    <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/pixstudio-square.svg"  class="mx-1" alt="">
+                  </div>
+                  <div class="scroll-fade-in" data-multiple="2">
+                    <div class="font-size-36 font-weight-bold mb-4">Explore the <br class="d-xl-inline d-none"> Power of Images</div>
+                    <p class="font-size-large mb-xl-5 mb-4 pr-xxl-5" style="line-height: 1.56;">Our powerful and easy design solutions <br class="d-xl-inline d-none"> allow you to create, edit, and improve <br class="d-xl-inline d-none"> your photos and graphics. </p>
+                  </div>
+                  <div class="scroll-fade-in"><a href="#" class="btn-gradient gradient-1" >Explore Photo Solutions</a></div>
+                </div>
+              </div>
+              <div class="col-lg-7 py-3 scroll-fade-in-img">
+                <div class="mx-auto" style="max-width: 570px;">
+                  <div class="position-relative border-radius-video">
+                    <video poster="https://cdn.vidyard.com/thumbnails/16624580/tECC7tqmK3fluDII2IurN8Chzr9XmMxy.jpg" preload loop muted webkit-playsinline playsinline class="show-to-play" style="max-width: 100%;">
+                      <source src="https://cdn.vidyard.com/videos/s067QgOfbkJi1-lbd4j6KQ/source.mp4?Py0rly5DUgiPX11kr9Q15f91vplw3LtwqiUOTvPGD89BS2bO0DdKmt1ftwowAtpsFN_kWdHvsD1W3Vj07iwRHaqjreCb8mxDhvM8gUE5u60Hrw" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-5">
+        <div class="py-5 border-radius" style="background: linear-gradient(90deg, rgba(0, 109, 255, 0.2) 0%, rgba(255, 231, 130, 0.2) 100%);">
+          <div class="container py-lg-5 text-center">
+            <div class="mb-4 pb-2 mx-n1 scroll-fade-in diff-icons" data-multiple="3">
+              <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/pdfelement-square.svg"  class="mx-1" alt="">
+              <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/edraw-max-square.svg"  class="mx-1" alt="">
+              <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/edraw-mindmaster-square.svg"  class="mx-1" alt="">
+            </div>
+            <div class="scroll-fade-in" data-multiple="2">
+              <div class="font-size-36 font-weight-bold mb-3">Move Your Ideas Forward</div>
+              <p class="pb-2">Drive business productivity and communications with <br> powerful UX, diagramming, and document solutions.</p>
+            </div>
+            <div class="scroll-fade-in mb-5"><a href="#" class="btn-gradient gradient-2" style="font-size: 1em;"> Explore Productivity Solutions</a></div>
+            <div class="py-4 scroll-fade-in-img">
+              <div id="productivity-solutions" class="lottie-video d-inline-block"></div>
+              <img src="https://images.wondershare.com/WSCOM2021/Productivity-solutions.png" class="img-fluid" alt="">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-5">
+        <div class="py-5 border-radius" style="background: linear-gradient(90deg, rgba(102, 255, 128, 0.2) 0%, rgba(0, 176, 255, 0.2) 97.68%);">
+          <div class="container py-lg-5 text-center">
+            <div class="row align-items-center py-lg-5">
+              <div class="col-lg-5 py-3 text-lg-left d-lg-flex justify-content-end">
+                <div class="">
+                  <div class="mb-4 pb-2 mx-n1 scroll-fade-in diff-icons" data-multiple="3">
+                    <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/drfone-square.svg"  class="mx-1" alt="">
+                    <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/recoverit-square.svg"  class="mx-1" alt="">
+                  </div>
+                  <div class="scroll-fade-in" data-multiple="2">
+                    <div class="font-size-36 font-weight-bold mb-4">Tools to Save <br class="d-xl-inline d-none"> Your Digital Life</div>
+                    <p class="font-size-large mb-4 pb-xxl-2 pr-xxl-5" style="line-height: 1.56;">Data protection and management tools <br class="d-xl-inline d-none"> to keep you safe both online and offline.  </p>
+                  </div>
+                  <div class="scroll-fade-in"><a href="#" class="btn-gradient gradient-3" style="font-size: 1em;">Explore Utility Solutions</a></div>
+                </div>
+              </div>
+              <div class="col-lg-7 py-3 scroll-fade-in-img">
+                <div id="utility-solutions" class="lottie-video d-inline-block"></div>
+                <img src="https://images.wondershare.com/WSCOM2021/Utility-solutions.png" class="img-fluid" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-5">
+        <div class="container pb-lg-5">
+          <div class="text-center h2 mb-5 py-lg-5" style="font-family: inherit;">Learn More About Wondershare</div>
+          <div class="row row-cols-lg-3 row-cols-1 mt-n3">
+            <div class="col py-3">
+              <a href="#" target="_blank">
+                <div class="h-100 border-gray border-radius overflow-hidden bg-white hover-up d-flex flex-column justify-content-between">
+                  <div>
+                    <img src="https://images.wondershare.com/WSCOM2021/homepage-bottom-1.png" class="w-100" alt="">
+                    <div class="px-3 pt-3 m-xl-3">
+                      <div class="font-size-tiny mb-3">Wondershare News</div>
+                      <div class="font-size-super mb-4 multi-ellipsis">Wondershare Technology Wins “Future Tech Award” for “Best Creative Software Suite” at CES…</div>
+                    </div>
+                  </div>
+                  <div class="px-3 pb-3 m-xl-3 font-size-tiny">
+                    Feb 08, 2021
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="col py-3">
+              <a href="#" target="_blank">
+                <div class="h-100 border-gray border-radius overflow-hidden bg-white hover-up d-flex flex-column justify-content-between">
+                  <div>
+                    <img src="https://images.wondershare.com/WSCOM2021/homepage-bottom-2.png" class="w-100" alt="">
+                    <div class="px-3 pt-3 m-xl-3">
+                      <div class="font-size-tiny mb-3">Wondershare Explore</div>
+                      <div class="font-size-super mb-4 multi-ellipsis">Learn new things, share your creativity, and win amazing prizes!</div>
+                    </div>
+                  </div>
+                  <div class="px-3 pb-3 m-xl-3 font-size-tiny">
+                    Feb 08, 2021
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="col py-3">
+              <a href="#" target="_blank">
+                <div class="h-100 border-gray border-radius overflow-hidden bg-white hover-up d-flex flex-column justify-content-between">
+                  <div>
+                    <img src="https://images.wondershare.com/WSCOM2021/homepage-bottom-3.png" class="w-100" alt="">
+                    <div class="px-3 pt-3 m-xl-3">
+                      <div class="font-size-tiny mb-3">What’s New</div>
+                      <div class="font-size-super mb-4 multi-ellipsis">Wondershare Unveils Filmora X the Next Generation Video Editor</div>
+                    </div>
+                  </div>
+                  <div class="px-3 pb-3 m-xl-3 font-size-tiny">
+                    Feb 08, 2021
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div class="parameter" data-toggle="gotop" data-type="ws2020"></div>
+  <footer class="wsc-footer2020">
+    <div class="wsc-footer2020-top wsc-footer202004-top">
+      <div class="wsc-footer2020-container">
+        <div class="wsc-footer2020-top-content">
+          <div class="wsc-footer2020-nav">
+            <a href="/"><img class="wsc-footer2020-nav-logo"
+                src="https://neveragain.allstatics.com/2019/assets/icon/logo/wondershare-slogan-vertical-white.svg"
+                alt=""></a>
+          </div>
+          <div class="wsc-footer2020-subnav">
+            <div class="wsc-footer2020-subnav-content">
+              <div class="wsc-footer2020-dropdown">
+                <nav class="wsc-footer2020-dropdown-toggle" aria-expanded="false">
+                  <h5 class="wsc-footer2020-dropdown-title">Hero Products</h5>
+                  <div class="wsc-footer2020-dropdown-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6 9L12 15L18 9" stroke="white" stroke-width="1.5"></path>
+                    </svg>
+                  </div>
+                </nav>
+                <div class="wsc-footer2020-dropdown-menu">
+                  <ul>
+                    <li class="wsc-footer2020-subnav-item">
+                      <a class="wsc-footer2020-subnav-link" href="https://filmora.wondershare.com/">Filmora</a>
+                    </li>
+                    <li class="wsc-footer2020-subnav-item">
+                      <a class="wsc-footer2020-subnav-link" href="https://uniconverter.wondershare.com/">UniConverter</a>
+                    </li>
+                    <li class="wsc-footer2020-subnav-item">
+                      <a class="wsc-footer2020-subnav-link" href="https://recoverit.wondershare.com/">Recoverit</a>
+                    </li>
+                    <li class="wsc-footer2020-subnav-item">
+                      <a class="wsc-footer2020-subnav-link" href="https://drfone.wondershare.com/">Dr.Fone</a>
+                    </li>
+                    <li class="wsc-footer2020-subnav-item">
+                      <a class="wsc-footer2020-subnav-link" href="https://pdf.wondershare.com/">PDFelement</a>
+                    </li>
+                    <li class="wsc-footer2020-subnav-item">
+                      <a class="wsc-footer2020-subnav-link" href="https://famisafe.wondershare.com/">FamiSafe</a>
+                    </li>
+                    <li class="wsc-footer2020-subnav-item">
+                      <a class="wsc-footer2020-subnav-link" href="/products/">All Products</a>
+                    </li>                      
+                  </ul>
+                </div>
+              </div>
+              <div class="wsc-footer2020-dropdown">
+                <nav class="wsc-footer2020-dropdown-toggle" aria-expanded="false">
+                  <h5 class="wsc-footer2020-dropdown-title">Wondershare</h5>
+                  <div class="wsc-footer2020-dropdown-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6 9L12 15L18 9" stroke="white" stroke-width="1.5"></path>
+                    </svg>
+                  </div>
+                </nav>
+                <div class="wsc-footer2020-dropdown-menu">
+                  <ul>
+                    <li class="wsc-footer2020-subnav-item">
+                      <a class="wsc-footer2020-subnav-link" href="/about/">About</a>
+                    </li>
+                    <li class="wsc-footer2020-subnav-item">
+                      <a class="wsc-footer2020-subnav-link" href="/news/">Newsroom</a>
+                    </li>
+                    <li class="wsc-footer2020-subnav-item">
+                      <a class="wsc-footer2020-subnav-link" href="/about/global-presence.html">Global Presence</a>
+                    </li>
+                    <li class="wsc-footer2020-subnav-item">
+                      <a class="wsc-footer2020-subnav-link" href="/about/funders-speech.html">Fouder's Speach</a>
+                    </li>
+                    <li class="wsc-footer2020-subnav-item">
+                      <a class="wsc-footer2020-subnav-link" href="/about/careers.html">Carrers</a>
+                    </li>
+                    <li class="wsc-footer2020-subnav-item">
+                      <a class="wsc-footer2020-subnav-link" href="/about/contact-us.html">Contact us</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="wsc-footer2020-dropdown">
+                <nav class="wsc-footer2020-dropdown-toggle" aria-expanded="false">
+                  <h5 class="wsc-footer2020-dropdown-title">Video community</h5>
+                  <div class="wsc-footer2020-dropdown-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6 9L12 15L18 9" stroke="white" stroke-width="1.5"></path>
+                    </svg>
+                  </div>
+                </nav>
+                <div class="wsc-footer2020-dropdown-menu">
+                  <ul>
+                    <li class="wsc-footer2020-subnav-item">
+                      <a class="wsc-footer2020-subnav-link" href="/explore/inspiration.html">Explore</a>
+                    </li>
+                    <nav class="wsc-footer2020-dropdown-toggle pt-4" aria-expanded="false">
+                      <h5 class="wsc-footer2020-dropdown-title">Group member</h5>
+                    </nav>
+                    <li class="wsc-footer2020-subnav-item">
+                      <a class="wsc-footer2020-subnav-link" href="https://www.edrawsoft.com/">
+                        <img class="wsc-footer2020-subnavLink-logo" 
+                          src="https://neveragain.allstatics.com/2019/assets/icon/logo/edraw-horizontal-white.svg"
+                          alt="">
+                      </a>
+                    </li>
+
+                    <nav class="wsc-footer2020-dropdown-toggle" aria-expanded="true">
+                      <h5 class="wsc-footer2020-dropdown-title">Follow us</h5>
+                    </nav>
+                      <ul>
+                        <li class="wsc-footer2020-subnav-item">
+                          <a class="wsc-footer2020-subnav-iconlink" href="https://www.facebook.com/wondershare/">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M13 1C6.92487 1 2 5.92487 2 12C2 17.4558 5.97189 21.9839 11.1818 22.8504L11.1818 15H9V12H11.1818L11.1818 10C11.1818 8.93913 11.5649 7.92172 12.2469 7.17157C12.9288 6.42143 13.8538 6 14.8182 6H17V9.2H14.8182C14.6253 9.2 14.4403 9.28429 14.3039 9.43431C14.1675 9.58434 14.0909 9.78783 14.0909 10L14.0909 12H17L16.2727 15H14.0909L14.0909 22.9466C19.6539 22.3989 24 17.707 24 12C24 5.92487 19.0751 1 13 1Z"
+                                fill="white"></path>
+                            </svg>
+                          </a>
+                          <a class="wsc-footer2020-subnav-iconlink" href="https://www.instagram.com/wondershare/">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M2 7C2 4.23858 4.23858 2 7 2H17C19.7614 2 22 4.23858 22 7V17C22 19.7614 19.7614 22 17 22H7C4.23858 22 2 19.7614 2 17V7ZM12.4833 8.98924C11.8591 8.89668 11.2217 9.0033 10.6616 9.29392C10.1015 9.58455 9.64727 10.0444 9.36357 10.608C9.07988 11.1717 8.98113 11.8104 9.08138 12.4334C9.18163 13.0564 9.47577 13.6319 9.92196 14.0781C10.3681 14.5243 10.9437 14.8184 11.5667 14.9187C12.1897 15.0189 12.8284 14.9202 13.392 14.6365C13.9557 14.3528 14.4155 13.8986 14.7061 13.3385C14.9968 12.7784 15.1034 12.1409 15.0108 11.5167C14.9164 10.88 14.6197 10.2906 14.1646 9.83547C13.7095 9.38034 13.12 9.08365 12.4833 8.98924ZM9.74043 7.51868C10.6739 7.0343 11.7364 6.85661 12.7767 7.01087C13.8378 7.16823 14.8203 7.6627 15.5788 8.42126C16.3374 9.17981 16.8318 10.1622 16.9892 11.2234C17.1435 12.2637 16.9658 13.3261 16.4814 14.2596C15.997 15.1931 15.2306 15.9501 14.2912 16.423C13.3518 16.8958 12.2873 17.0604 11.2489 16.8933C10.2106 16.7262 9.2514 16.236 8.50774 15.4923C7.76409 14.7487 7.27386 13.7895 7.10678 12.7511C6.9397 11.7128 7.10428 10.6482 7.5771 9.70884C8.04993 8.76944 8.80693 8.00305 9.74043 7.51868ZM17.5 5.5C16.9477 5.5 16.5 5.94772 16.5 6.5C16.5 7.05228 16.9477 7.5 17.5 7.5H17.51C18.0623 7.5 18.51 7.05228 18.51 6.5C18.51 5.94772 18.0623 5.5 17.51 5.5H17.5Z"
+                                fill="white"></path>
+                            </svg>
+                          </a>
+                          <a class="wsc-footer2020-subnav-iconlink" href="https://twitter.com/wondershare">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path
+                                d="M23 3.00029C22.0424 3.67577 20.9821 4.1924 19.86 4.53029C19.2577 3.8378 18.4573 3.34698 17.567 3.12422C16.6767 2.90145 15.7395 2.95749 14.8821 3.28474C14.0247 3.612 13.2884 4.19469 12.773 4.95401C12.2575 5.71332 11.9877 6.61263 12 7.53029V8.53029C10.2426 8.57586 8.50127 8.1861 6.93101 7.39574C5.36074 6.60537 4.01032 5.43893 3 4.00029C3 4.00029 -1 13.0003 8 17.0003C5.94053 18.3983 3.48716 19.0992 1 19.0003C10 24.0003 21 19.0003 21 7.50029C20.9991 7.22174 20.9723 6.94388 20.92 6.67029C21.9406 5.66378 22.6608 4.393 23 3.00029Z"
+                                fill="white"></path>
+                            </svg>
+                          </a>
+                          <a class="wsc-footer2020-subnav-iconlink" href="https://www.youtube.com/user/Wondershare">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M21.8386 5.15941C22.1792 5.51057 22.4212 5.94541 22.54 6.42C22.8572 8.1787 23.0112 9.96295 23 11.75C23.0063 13.5103 22.8523 15.2676 22.54 17C22.4212 17.4746 22.1792 17.9094 21.8386 18.2606C21.498 18.6118 21.0707 18.8668 20.6 19C18.88 19.46 12 19.46 12 19.46C12 19.46 5.11996 19.46 3.39996 19C2.93878 18.8738 2.51794 18.6308 2.17811 18.2945C1.83827 17.9581 1.59092 17.5398 1.45996 17.08C1.14273 15.3213 0.988741 13.537 0.999961 11.75C0.991197 9.97631 1.14518 8.20556 1.45996 6.46C1.57875 5.98541 1.82068 5.55057 2.16131 5.19941C2.50194 4.84824 2.92921 4.59318 3.39996 4.46C5.11996 4 12 4 12 4C12 4 18.88 4 20.6 4.42C21.0707 4.55318 21.498 4.80824 21.8386 5.15941ZM15.5 11.75L9.74997 15.02V8.47998L15.5 11.75Z"
+                                fill="white"></path>
+                            </svg>
+                          </a>
+                          <a class="wsc-footer2020-subnav-iconlink" href="https://www.wondershare.com/connect/">
+                            <svg width="16" height="4" viewBox="0 0 16 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle opacity="0.8" cx="2" cy="2" r="2" fill="white"></circle>
+                              <circle opacity="0.8" cx="8" cy="2" r="2" fill="white"></circle>
+                              <circle opacity="0.8" cx="14" cy="2" r="2" fill="white"></circle>
+                            </svg>
+                          </a>
+                        </li>
+                      </ul>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wsc-footer2020-bottom wsc-footer202004-bottom">
+      <div class="wsc-footer2020-container">
+        <div class="wsc-footer2020-bottom-content">
+          <div class="wsc-footer2020-copyright">
+            <div class="wsc-footer2020-copyright-top">
+              <a class="wsc-footer2020-copyright-link"
+                href="https://www.wondershare.com/company/terms_conditions.html">Terms and Conditions</a>
+              <a class="wsc-footer2020-copyright-link" href="https://www.wondershare.com/privacy.html">Privacy</a>
+              <a class="wsc-footer2020-copyright-link"
+                href="https://www.wondershare.com/cookies-policy.html">Cookies</a>
+              <a class="wsc-footer2020-copyright-link"
+                href="https://www.wondershare.com/company/end-user-license-agreement.html">License Agreement</a>
+              <a class="wsc-footer2020-copyright-link" href="http://support.wondershare.com/en/292/56/faq/1452">Refund
+                Policy</a>
+              <a class="wsc-footer2020-copyright-link" href="https://www.wondershare.com/uninstall.html">Uninstall</a>
+            </div>
+            <div class="wsc-footer2020-copyright-bottom">
+              <p>Copyright © <span id="copyright-year"></span> <script> document.querySelector('#copyright-year').outerHTML = new Date().getFullYear() </script> Wondershare. All rights reserved. The order process, tax issue and invoicing to end
+                user is conducted by Wondershare Technology Co., Ltd, which is the subsidiary of Wondershare group.</p>
+            </div>
+          </div>
+          <div class="wsc-footer2020-mobile-language">
+            <nav class="wsc-footer2020-mobile-language-toggle" aria-expanded="false">
+              <span>Language</span>
+              <div class="wsc-footer2020-mobile-language-icon">
+                <svg width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 5L0.669873 0.499999L9.33013 0.5L5 5Z" fill="#C4C4C4"></path>
+                </svg>
+              </div>
+            </nav>
+            <div class="wsc-footer2020-mobile-language-menu">
+              <a class="wsc-footer2020-mobile-language-link active" href="https://www.wondershare.com">English</a>
+              <a class="wsc-footer2020-mobile-language-link" href="https://www.wondershare.de">Deutsch</a>
+              <a class="wsc-footer2020-mobile-language-link" href="https://www.wondershare.fr">Français</a>
+              <a class="wsc-footer2020-mobile-language-link" href="https://www.wondershare.it">Italiano</a>
+              <a class="wsc-footer2020-mobile-language-link" href="https://www.wondershare.es">Español</a>
+              <a class="wsc-footer2020-mobile-language-link" href="https://www.wondershare.com.br">Português</a>
+              <a class="wsc-footer2020-mobile-language-link" href="https://www.wondershare.jp">日本語</a>
+              <a class="wsc-footer2020-mobile-language-link" href="https://www.wondershare.kr">한국어</a>
+              <a class="wsc-footer2020-mobile-language-link" href="https://www.wondershare.cn">简体中文</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    (function(){
+      var isIE = window.ActiveXObject || "ActiveXObject" in window || navigator.userAgent.indexOf('Trident') > -1
+      isIE && (window.NodeList.prototype.forEach = window.Array.prototype.forEach)
+      requestAnimationFrame( function (previousTimestamp) {
+        var signautre = document.querySelector('#slogan-signature')
+        signautre.src = signautre.src
+        loop(previousTimestamp, 10000, function () {
+          signautre.src = signautre.src
+        })
+      } )
+
+      function loop(previousTimestamp, duration, callback) {
+        requestAnimationFrame( function (stamp) {
+          if (stamp - previousTimestamp > duration) {
+            previousTimestamp = stamp
+            callback && callback()
+          }
+          return loop(previousTimestamp, duration, callback)
+        } )
+      }
+      var parents = document.querySelectorAll('.wsc-header2020-navbar-item.with-toggle'),
+          children = document.querySelectorAll('.wsc-header2020-navbar-nav-toggle')
+      
+      document.querySelectorAll('.active_menu_a').forEach(function (el) {
+        el.addEventListener('click', handleWsNavToggle)
+      })
+      children.forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          e.stopPropagation()
+        })
+        el.addEventListener('transitionend', function (e) {
+          var height = el.getBoundingClientRect().height
+          height === 0 && (el.style.transform = '')
+        })
+      })
+      document.body.addEventListener('click', function (e) {
+        resetNav()
+        children.forEach(function (el) {
+          handleCollapse(el, true)
+        })
+      })
+      function resetNav () {
+        parents.forEach(function (el) {
+          el.classList.remove('active')
+        })
+        children.forEach(function (el) {
+          handleCollapse(el, true)
+        })
+      }
+      function handleCollapse (el, actived) {
+        var height = actived ? 0 : el.children[0].getBoundingClientRect().height
+            el.style.height = height + 'px'
+      }
+
+      
+      function handleWsNavToggle (e) {
+        e.stopPropagation()
+        var target = e.target
+            actived = target.parentElement.classList.contains('active')
+            el_dropdown = target.nextElementSibling
+        
+        !actived && resetNav()
+        var x = document.body.offsetWidth - el_dropdown.getBoundingClientRect().right
+        x < 0 && (el_dropdown.style.transform = 'translate3d(' + x + 'px, 0, 0)')
+
+        handleCollapse(el_dropdown, actived)
+        target.parentElement.classList.toggle('active')
+        
+      }
+    }())
+  </script>
+  <script>
+    (function() {
+      var scrollElement = document.scrollingElement || document.documentElement || document.body
+      var scroll_move_up = document.querySelector('.scroll-move-up')
+      var clip_video = document.querySelector('#clip_video')
+      var clip_video_parent = clip_video.parentElement
+      var scroll_fade_in = document.querySelectorAll('.scroll-fade-in')
+      var scroll_fade_in_icons = document.querySelectorAll('.scroll-fade-in-icons')
+      var scroll_fade_in_imgs = document.querySelectorAll('.scroll-fade-in-img')
+      var fade_in = document.querySelector('.center-fadein')
+      var fade_in_up = document.querySelectorAll('.fade-in-up')
+      var video_control_width, clip_video_rect, window_view
+      var threshold = 400, clipRatio = 0.14, clip_h = 96, scrollRatio = 1 / 0.6
+      var isIE = window.ActiveXObject || "ActiveXObject" in window || navigator.userAgent.indexOf('Trident') > -1
+      init ()
+      function init () {
+        window_view = getViewSize()
+        clip_video_rect = clip_video.getBoundingClientRect()
+        video_control_width = document.querySelector('#video-width-control').getBoundingClientRect().width - 30 
+        scrollElement.scrollTop === 0 && (clipVideo(clipRatio) ,fixedVideo(clip_video_parent.getBoundingClientRect().top, clip_video_rect.height, 0))
+        scrollFadeInit ()
+      }
+      
+      var playList = [], listenList = []
+      document.querySelectorAll('video.show-to-play').forEach( function (el) { playList.push(el) } )
+
+      function scrollFadeInit () {
+        scroll_fade_in.length > 0 && scroll_fade_in[0].getBoundingClientRect().top <= window_view.height &&
+        scroll_fade_in.forEach( function (el) {
+          el.getBoundingClientRect().top <= window_view.height && scrollFadeIn(el)
+        } )
+
+        scroll_fade_in_icons.length > 0 && scroll_fade_in_icons[0].getBoundingClientRect().top <= window_view.height &&
+        scroll_fade_in_icons.forEach( function (el) {
+          [].forEach.call(el.children, function (el, index) {
+            el.getBoundingClientRect().top <= window_view.height && scrollFadeIn(el, index)
+          })
+        } )
+
+        scroll_fade_in_imgs.length > 0 && scroll_fade_in_imgs[0].getBoundingClientRect().top <= window_view.height &&
+        scroll_fade_in_imgs.forEach ( function (el) {
+          el.getBoundingClientRect().top <= window_view.height && scrollFadeIn(el, 0, true)
+        } )
+      }
+      //监听滚动元素队列
+      function scrollFadeIn (el, delta, isImg) {
+        requestAnimationFrame ( function () {
+          delta = delta || 0
+          var rect = el.getBoundingClientRect()
+          var vh = window_view.height / (scrollRatio + delta * 0.1)
+          if (rect.top <= vh) {
+            el.style.setProperty('--opacity', 1)
+            el.style.setProperty('--translate-y', 0)
+            return
+          }
+
+          var ratio = (rect.top - vh) / vh
+          ratio = ratio <= 1 ? ratio : 1
+          var multi = +el.getAttribute('data-multiple')
+          multi = multi || 1
+          el.style.setProperty('--opacity', (1 - 1 * ratio))
+          el.style.setProperty('--translate-y', 50 * ratio * multi)
+          isImg && el.style.setProperty('--scale', 1 - 0.2 * ratio)
+        } )
+      }
+      
+      loop(0, window_view.width, loopAnimation(document.documentElement, 10), function (previousScrollTop, scrollTop) {
+        clipVideo(clipRatio, clip_video_rect, scrollTop )
+        
+        var top = clip_video_parent.getBoundingClientRect().top
+
+        window_view.width > 992 && fixedVideo(top, clip_video_rect.height, scrollTop)
+
+        playList && playList.forEach( function (el, index) {
+          var top = el.getBoundingClientRect().top
+          if (top <= window_view.height) {
+            el.play()
+            playList.splice(index, 1)
+            playList = playList.length === 0 ? null : playList
+          }
+        })
+
+        scrollFadeInit ()
+      })
+      //模拟滚动
+      function loop(previousScrollTop, previousClientWidth, animaitonCallback, callback) {
+        function repeat() {
+          requestAnimationFrame( function () {
+            loop(previousScrollTop, previousClientWidth, animaitonCallback, callback)
+          } )
+        }
+        var scrollTop = scrollElement.scrollTop
+        var clientWidth = getViewSize().width
+        if( previousScrollTop === scrollTop ) {
+          animaitonCallback && animaitonCallback()
+          return repeat()
+        }
+        else {
+          callback && callback( previousScrollTop, scrollTop )
+          previousScrollTop = scrollTop
+        }
+
+        if (previousClientWidth !== clientWidth) {
+          init ()
+          clipVideo(clipRatio)
+          previousClientWidth =  clientWidth
+        }
+
+        return repeat()
+      }
+
+      //循环渐变动画
+      function loopAnimation( el, duration ) {
+        var start = start1 =  270, start2 = 90
+        var gap = (360 / (1000 * duration)) * 16
+        var btngap = (360 / (1000 * duration)) * 16
+        return function () {
+          start += gap
+          start1 += ((start1 >= 350 && start1 <= 380) || (start1 >= 520 && start1 <= 550) ) ? btngap / 10 : btngap
+          start2 += ((start2 >= 170 && start2 <= 200) || (start2 >= 340 && start2 <= 370) ) ? btngap / 10 : btngap
+          start = (start - 270) > 360 ? 270 : start
+          start1 = (start1 - 270) > 360 ? 270 : start1
+          start2 = (start2 - 90) > 360 ? 90 : start2
+          el.style.setProperty('--gradient-deg', start + 'deg')
+          el.style.setProperty('--btngradient-deg1', start1 + 'deg')
+          el.style.setProperty('--btngradient-deg2', start2 + 'deg')
+        }
+      }
+      //裁剪视频
+      function clipVideo( limit, rect, scrollTop ) {
+        clip_video.paused && clip_video.play()
+        scrollTop = scrollTop || scrollElement.scrollTop
+        rect = rect || clip_video.getBoundingClientRect()
+
+        var top, right, bottom, left, ratio
+
+        limit = limit || 0.14
+        ratio = limit -  scrollTop / rect.width
+        ratio = ratio >= 0 ? ratio : 0
+
+        top = ratio * rect.height, 
+        right = (rect.width - ratio * rect.width), 
+        bottom = (rect.height - ratio * rect.height), 
+        left = ratio * rect.width
+
+
+        if (isIE) {
+          clip_video.style.clip = 'rect(' + top + 'px ' + right + 'px ' + bottom + 'px ' + left + 'px)'
+        }else {
+          var radius = ratio * 100
+          radius = radius >= 10 ? 10 : radius
+          clip_video.style.setProperty('--clip-v', top + 'px')
+          clip_video.style.setProperty('--clip-h', left + 'px')
+          clip_video.style.setProperty('--round', radius + 'px')
+        }
+        clip_video.style.opacity = 1
+        ratio === 0 ? fade_in.classList.add('show') : fade_in.classList.remove('show')
+      }
+
+      //固定视频
+      function fixedVideo ( y, height, scrollTop ) {
+        var top = (clipRatio -  scrollTop / clip_video_rect.width) * clip_video_rect.height
+        if ( window_view.width > 992 ) {
+          var diff = clip_h - top, alpha = 1 - scrollTop / 400
+
+          clip_video_parent.style.setProperty('--translate-y', diff < 0 ? diff : 0)
+          scroll_move_up.style.setProperty('--translate-y', diff >= 0 ? -diff : 0)
+          scroll_move_up.style.setProperty('--opacity', alpha > 0 ? alpha : 0)
+        }
+        fade_in.style.setProperty('--translate-y', top / 2)
+      }
+
+      //控制视频放大及还原
+      function expandV ( el ) {
+        var video = el.children[0]
+        var rect = video.getBoundingClientRect()
+        var width = el.getBoundingClientRect().width
+
+        if(width === rect.width) {
+          fade_in_up.forEach ( function (el) {
+            el.classList.add('active')
+          } )
+          //fade_in_up.classList.add('active')
+          video.paused && video.play()
+        }
+
+        if(rect.top <= threshold && rect.width !== width) {
+          video.style.width = width + 'px'
+          fade_in_up.forEach ( function (el) {
+            el.classList.add('active')
+          } )
+          //fade_in_up.classList.add('active')
+          video.paused && video.addEventListener('transitionend', function () {
+            requestAnimationFrame ( function () {
+              video && video.play()
+              video = null
+            } )
+          })
+        }
+
+        if (rect.top > window_view.height && rect.width !== video_control_width) {
+          if (video.paused) return
+          video.style.width = video_control_width + 'px'
+          fade_in_up.forEach ( function (el) {
+            el.classList.remove('active')
+          } )
+          //fade_in_up.classList.remove('active')
+          var src = video.src
+          video.src = ''
+          video.src = src
+        }
+      }
+
+      function getViewSize () {
+        return {
+          width: window.innerWidth || window.outerWidth,
+          height: window.innerHeight || window.outerHeight
+        }
+      }
+
+      getLottie()
+      function getLottie() {
+        if (isIE) return
+        var observer = new MutationObserver(animation_loaded)
+        var mutation_count = 0
+        var slides_satck = document.querySelectorAll('.lottie-video')
+
+        if(slides_satck.length === 0) return
+
+        var s = document.createElement('script')
+            s.src = 'https://neveragain.allstatics.com/2019/assets/vendor/lottie.min.js'
+            s.async = true
+            document.body.appendChild(s)
+
+        s.onload = function () {
+          slides_satck.forEach ( function(el) {
+            observer.observe(el, { childList: true })
+            lottie.loadAnimation({
+                container: el,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'https://www.wondershare.com/assets/json2021/' + el.id + '.json'
+              })
+          } )
+        }
+
+
+        function animation_loaded(mutations) {
+          mutations.forEach(function(mutation) {
+            var sibling = mutation.target.nextElementSibling ? 'nextElementSibling' : 'nextSibling'
+            if (mutation.target[sibling] && mutation.target[sibling].tagName === 'IMG') {
+              mutation.target[sibling].style.display = 'none'
+            }
+          })
+          ++mutation_count >= slides_satck.length && (observer.disconnect(), observer = null)
+        }
+      }
+
+    }())
+  </script>
+
+  <script src="https://neveragain.allstatics.com/2019/assets/vendor/wsc-vendor.js"></script>
+  <script src="https://neveragain.allstatics.com/2019/assets/script/wsc-override-ws.js"></script>
+  <script src="https://neveragain.allstatics.com/2019/assets/script/wsc-common.js"></script>
+  <script>
+    $(function () {
+      wsc.common.init()
+    })
+  </script>
+
+</body>
+
+</html>
