@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://neveragain.allstatics.com/2019/assets/style/bootstrap-wondershare.min.css">
 
   <link rel="stylesheet" href="https://www.wondershare.com/assets/global.min.css">
+  <!-- <link rel="stylesheet" href="../assets/global.css"> -->
   <title>Homepage</title>
 
   <style>
@@ -105,6 +106,7 @@
       top: 0; 
       position: sticky !important;
       transform: matrix(1,0,0,1,0,var(--translate-y));
+      margin: 0 auto;
     }
     .scroll-move-up {
       --translate-y: 0;
@@ -116,17 +118,18 @@
       --clip-h: 0;
       --clip-v: 0;
       --round: 0;
+      position: absolute;
+      width: 100%;
       max-width: 2560px;
       top: 0;
-      left: -200%;
-      right: -200%;
-      top: -200%;
-      bottom: -200%;
       margin: auto;
       opacity: 0;
       transition: clip 50ms, clip-path 50ms;
       clip-path: inset(var(--clip-v) var(--clip-h) round var(--round));
       -webkit-clip-path: inset(var(--clip-v) var(--clip-h) round var(--round));
+    }
+    #clip_video video {
+      position: relative;
     }
     .center-fadein {
       --translate-y: 0;
@@ -213,6 +216,12 @@
       .btn-gradient.gradient-3{background: linear-gradient(90deg, #00B0FF 0%, #66FF80 97.68%);}
       .btn-gradient::before,.btn-gradient::after { display: none; }
 
+    }
+
+    @media only screen and (min-aspect-ratio: 21/9){
+      .clip_video_container {
+        max-width: 1920px;
+      }
     }
   </style>
 
@@ -477,14 +486,16 @@
           <h1 class="family-inherit">Built for your </h1>
           <div class="px-5"><img src="https://images.wondershare.com/WSCOM2021/Creative-Future.gif" class="img-fluid" width="452px" alt=""> </div>
           <p class="font-size-extra py-3" style="font-family: inherit;letter-spacing: -.01em;">Software that empowers you to dream bigger.</p>
-          <a href="#" class="btn-custom white rounded-pill">Discover Creativity Solutions</a>
+          <a href="https://www.wondershare.com/products-solutions/digital-creativity/" class="btn-custom white rounded-pill">Discover Creativity Solutions</a>
         </div>
       </div>
     </section>
     <div class="embed-responsive embed-responsive-16by9 bg-cover clip_video_container">
-      <video id="clip_video" poster="https://cdn.vidyard.com/thumbnails/16624581/lBdQ_T0zNn1mH2t6RxtE5RZoIJmw5hHh.jpg" preload loop muted webkit-playsinline playsinline >
-        <source src="https://cdn.vidyard.com/videos/A5XZYTpc9SR6D5tbmex2Pw/source.mp4?3v11FRc4GX-6gp6jw_Z6ec2eRgdjhnzdGblC1tVchQDhWe2ZlKmT1YhaPZHz2kotIPpRAoN6Jbs44gxG9_utStB7sPjG1z-Py1SP-4htZmSTqw" type="video/mp4">
-      </video>
+      <div id="clip_video">
+        <video poster="https://cdn.vidyard.com/thumbnails/16856608/52KA5OyOgJJeUoEc8hdlaTeNVxyqREDx.jpg" preload loop muted webkit-playsinline playsinline >
+          <source src="https://cdn.vidyard.com/videos/VKFPJQRMjfcZl6mUBf5qDQ/source.mp4?tV1FnGihz7UnR4gC_poOU-tAVGihA59mZKuMJCr93xeygmIMq5KxtEn2zJRKzccnDp0vsl_WcxxnLVrT_0zpfNJKdKOqz35b-8ja0eGniYv_jQ" type="video/mp4">
+        </video>
+      </div>
       <div class="center-fadein d-flex text-white flex-column justify-content-center align-items-center text-center">
         <div class="font-size-title-52 font-weight-bold">Make Videos That <br>  <img src="https://images.wondershare.com/WSCOM2021/Imress-white.svg" style="height: 1.75em;" alt="Impress"></div>
       </div>
@@ -493,7 +504,7 @@
     <div class="padding-control pt-lg-5" style="position: relative;background-color: #ffffff;">
       <section class="py-5">
         <div class="py-5 border-radius" style="background: linear-gradient(270deg, rgba(0, 255, 253, 0.2) 0%, rgba(236, 0, 255, 0.2) 51.26%, rgba(255, 103, 0, 0.2) 100%);">
-          <div class="container" id="video-width-control">
+          <div class="container text-lg-left text-center" id="video-width-control">
             <div class="row align-items-center py-lg-5">
               <div class="col-lg-5 order-lg-2 py-3 d-lg-flex justify-content-center">
                 <div class="">
@@ -503,18 +514,19 @@
                     <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/uniconverter-square.svg"  class="mx-1" alt="">
                     <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/democreator-square.svg"  class="mx-1" alt="">
                     <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/demoair-square.svg"  class="mx-1" alt="">
+                    <img src="https://neveragain.allstatics.com/2019/assets/icon/logo/filmora-go-ios-square.svg"  class="mx-1" alt="">
                   </div>
                   <div class="scroll-fade-in" data-multiple="2">
                     <div class="font-size-36 font-weight-bold mb-4">Inspiration <br class="d-xl-inline d-none"> Is Out There</div>
-                    <p class="font-size-large mb-xl-5 mb-4" style="line-height: 1.56;">We provide video solutions for every <br class="d-xl-inline d-none"> skill level, every device, and every <br class="d-xl-inline d-none"> operating system. Record, edit, and get <br class="d-xl-inline d-none"> creative anywhere. </p>
+                    <p class="font-size-large mb-xl-5 mb-4" style="line-height: 1.56;">We provide video solutions for different <br class="d-xl-inline d-none"> skill level, every device, and every <br class="d-xl-inline d-none"> operating system. Record, edit, and get <br class="d-xl-inline d-none"> creative anywhere. </p>
                   </div>
-                  <div class="scroll-fade-in"><a href="#" class="btn-gradient gradient-1" >Explore Video Solutions</a></div>
+                  <div class="scroll-fade-in"><a href="https://www.wondershare.com/products-solutions/digital-creativity/video.html" class="btn-gradient gradient-1" >Explore Video Solutions</a></div>
                 </div>
               </div>
               <div class="col-lg-7 order-lg-1 py-3 scroll-fade-in-img">
                 <div class="position-relative border-radius-video">
                   <video poster="https://cdn.vidyard.com/thumbnails/16624579/GxaPP79BJQTxqYurE30vAMfEhhkC8nmj.jpg" preload loop muted webkit-playsinline playsinline class="show-to-play" style="max-width: 100%;">
-                    <source src="https://cdn.vidyard.com/videos/wdmuKPs-PU3kq5K-5M1ovQ/source.mp4?6bWkAf7gRDvGkXtn3kGtYaXYZHnfgQsEvXgacm21l5KuspVSCB20y0y-EY270LiAj9gEpEwLeVm4g5VqBoSO45VFoqbsZ2v70EUlO0kC2Nat3Q" type="video/mp4">
+                    <source src="https://cdn.vidyard.com/videos/ITay6zg2wCyz7D2qNLnL_Q/source.mp4?y8E-GivhHsUAquF2psG3s2XDSrUnAxXM1pisQlfs8lMreOIiKvvO7g60rXXl_gH00-1RZEUaR-X_sHgisIbmTT5HVc33WLnshcax1HcQ4JNi1A" type="video/mp4">
                   </video>
                 </div>
               </div>
@@ -531,14 +543,14 @@
                     <div class="font-size-36 font-weight-bold mb-4">Explore the <br class="d-xl-inline d-none"> Power of Images</div>
                     <p class="font-size-large mb-xl-5 mb-4 pr-xxl-5" style="line-height: 1.56;">Our powerful and easy design solutions <br class="d-xl-inline d-none"> allow you to create, edit, and improve <br class="d-xl-inline d-none"> your photos and graphics. </p>
                   </div>
-                  <div class="scroll-fade-in"><a href="#" class="btn-gradient gradient-1" >Explore Photo Solutions</a></div>
+                  <div class="scroll-fade-in"><a href="https://www.wondershare.com/products-solutions/digital-creativity/photo.html" class="btn-gradient gradient-1" >Explore Photo Solutions</a></div>
                 </div>
               </div>
               <div class="col-lg-7 py-3 scroll-fade-in-img">
                 <div class="mx-auto" style="max-width: 570px;">
                   <div class="position-relative border-radius-video">
                     <video poster="https://cdn.vidyard.com/thumbnails/16624580/tECC7tqmK3fluDII2IurN8Chzr9XmMxy.jpg" preload loop muted webkit-playsinline playsinline class="show-to-play" style="max-width: 100%;">
-                      <source src="https://cdn.vidyard.com/videos/s067QgOfbkJi1-lbd4j6KQ/source.mp4?Py0rly5DUgiPX11kr9Q15f91vplw3LtwqiUOTvPGD89BS2bO0DdKmt1ftwowAtpsFN_kWdHvsD1W3Vj07iwRHaqjreCb8mxDhvM8gUE5u60Hrw" type="video/mp4">
+                      <source src="https://cdn.vidyard.com/videos/IsXrbXVaycVJyzjZ98BhGA/source.mp4?uKRlR00NX1zcYulI7GAlndlp-gABcLuxEUlaRjN3CEsj4Oyqg9QUfubAyVsN0jCzqW8X9XzRVqnEv71tFZlH7pDU_afgassaQBTL9DM3ky-PWw" type="video/mp4">
                     </video>
                   </div>
                 </div>
@@ -558,12 +570,12 @@
             </div>
             <div class="scroll-fade-in" data-multiple="2">
               <div class="font-size-36 font-weight-bold mb-3">Move Your Ideas Forward</div>
-              <p class="pb-2">Drive business productivity and communications with <br> powerful UX, diagramming, and document solutions.</p>
+              <p class="pb-2 font-size-large" style="line-height: 1.56;">Drive business productivity and communications with <br> powerful UX, diagramming, and document solutions.</p>
             </div>
-            <div class="scroll-fade-in mb-5"><a href="#" class="btn-gradient gradient-2" style="font-size: 1em;"> Explore Productivity Solutions</a></div>
+            <div class="scroll-fade-in mb-5"><a href="https://www.wondershare.com/products-solutions/office-productivity/" class="btn-gradient gradient-2" style="font-size: 1em;"> Explore Productivity Solutions</a></div>
             <div class="py-4 scroll-fade-in-img">
               <div id="productivity-solutions" class="lottie-video d-inline-block"></div>
-              <img src="https://images.wondershare.com/WSCOM2021/Productivity-solutions.png" class="img-fluid" alt="">
+              <img data-src="https://images.wondershare.com/WSCOM2021/Productivity-solutions.png" class="img-fluid lazy-img" alt="">
             </div>
           </div>
         </div>
@@ -583,12 +595,12 @@
                     <div class="font-size-36 font-weight-bold mb-4">Tools to Save <br class="d-xl-inline d-none"> Your Digital Life</div>
                     <p class="font-size-large mb-4 pb-xxl-2 pr-xxl-5" style="line-height: 1.56;">Data protection and management tools <br class="d-xl-inline d-none"> to keep you safe both online and offline.  </p>
                   </div>
-                  <div class="scroll-fade-in"><a href="#" class="btn-gradient gradient-3" style="font-size: 1em;">Explore Utility Solutions</a></div>
+                  <div class="scroll-fade-in"><a href="https://www.wondershare.com/products-solutions/data-management/" class="btn-gradient gradient-3" style="font-size: 1em;">Explore Utility Solutions</a></div>
                 </div>
               </div>
               <div class="col-lg-7 py-3 scroll-fade-in-img">
                 <div id="utility-solutions" class="lottie-video d-inline-block"></div>
-                <img src="https://images.wondershare.com/WSCOM2021/Utility-solutions.png" class="img-fluid" alt="">
+                <img data-src="https://images.wondershare.com/WSCOM2021/Utility-solutions.png" class="img-fluid lazy-img" alt="">
               </div>
             </div>
           </div>
@@ -600,49 +612,40 @@
           <div class="text-center h2 mb-5 py-lg-5" style="font-family: inherit;">Learn More About Wondershare</div>
           <div class="row row-cols-lg-3 row-cols-1 mt-n3">
             <div class="col py-3">
-              <a href="#" target="_blank">
+              <a href="https://www.wondershare.com/news/wondershare-technology-wins-future-tech-award-for-best-creative-software-suite-at-ces-2021.html" target="_blank">
                 <div class="h-100 border-gray border-radius overflow-hidden bg-white hover-up d-flex flex-column justify-content-between">
                   <div>
-                    <img src="https://images.wondershare.com/WSCOM2021/homepage-bottom-1.png" class="w-100" alt="">
+                    <img data-src="https://images.wondershare.com/WSCOM2021/homepage-bottom-1.png" class="w-100 lazy-img" alt="">
                     <div class="px-3 pt-3 m-xl-3">
                       <div class="font-size-tiny mb-3">Wondershare News</div>
                       <div class="font-size-super mb-4 multi-ellipsis">Wondershare Technology Wins “Future Tech Award” for “Best Creative Software Suite” at CES…</div>
                     </div>
                   </div>
-                  <div class="px-3 pb-3 m-xl-3 font-size-tiny">
-                    Feb 08, 2021
-                  </div>
                 </div>
               </a>
             </div>
             <div class="col py-3">
-              <a href="#" target="_blank">
+              <a href="https://www.wondershare.com/explore/contest.html" target="_blank">
                 <div class="h-100 border-gray border-radius overflow-hidden bg-white hover-up d-flex flex-column justify-content-between">
                   <div>
-                    <img src="https://images.wondershare.com/WSCOM2021/homepage-bottom-2.png" class="w-100" alt="">
+                    <img data-src="https://images.wondershare.com/WSCOM2021/homepage-bottom-2.png" class="w-100 lazy-img" alt="">
                     <div class="px-3 pt-3 m-xl-3">
                       <div class="font-size-tiny mb-3">Wondershare Explore</div>
                       <div class="font-size-super mb-4 multi-ellipsis">Learn new things, share your creativity, and win amazing prizes!</div>
                     </div>
                   </div>
-                  <div class="px-3 pb-3 m-xl-3 font-size-tiny">
-                    Feb 08, 2021
-                  </div>
                 </div>
               </a>
             </div>
             <div class="col py-3">
-              <a href="#" target="_blank">
+              <a href="https://www.wondershare.com//products-solutions/new-products.html" target="_blank">
                 <div class="h-100 border-gray border-radius overflow-hidden bg-white hover-up d-flex flex-column justify-content-between">
                   <div>
-                    <img src="https://images.wondershare.com/WSCOM2021/homepage-bottom-3.png" class="w-100" alt="">
+                    <img data-src="https://images.wondershare.com/WSCOM2021/homepage-bottom-3.png" class="w-100 lazy-img" alt="">
                     <div class="px-3 pt-3 m-xl-3">
                       <div class="font-size-tiny mb-3">What’s New</div>
-                      <div class="font-size-super mb-4 multi-ellipsis">Wondershare Unveils Filmora X the Next Generation Video Editor</div>
+                      <div class="font-size-super mb-4 multi-ellipsis">Get info about major updates and new products.</div>
                     </div>
-                  </div>
-                  <div class="px-3 pb-3 m-xl-3 font-size-tiny">
-                    Feb 08, 2021
                   </div>
                 </div>
               </a>
@@ -932,15 +935,19 @@
       var scrollElement = document.scrollingElement || document.documentElement || document.body
       var scroll_move_up = document.querySelector('.scroll-move-up')
       var clip_video = document.querySelector('#clip_video')
+      var clip_video_player = clip_video.children[0]
       var clip_video_parent = clip_video.parentElement
       var scroll_fade_in = document.querySelectorAll('.scroll-fade-in')
       var scroll_fade_in_icons = document.querySelectorAll('.scroll-fade-in-icons')
       var scroll_fade_in_imgs = document.querySelectorAll('.scroll-fade-in-img')
       var fade_in = document.querySelector('.center-fadein')
       var fade_in_up = document.querySelectorAll('.fade-in-up')
+      var slides_satck = document.querySelectorAll('.lottie-video')
       var video_control_width, clip_video_rect, window_view
-      var threshold = 400, clipRatio = 0.14, clip_h = 96, scrollRatio = 1 / 0.6
+      var threshold = 400, clipRatio = 0.14, clip_h = 96, scrollRatio = 1 / 0.6, cliped = false, lottie_loaded = false
       var isIE = window.ActiveXObject || "ActiveXObject" in window || navigator.userAgent.indexOf('Trident') > -1
+      
+
       init ()
       function init () {
         window_view = getViewSize()
@@ -948,10 +955,33 @@
         video_control_width = document.querySelector('#video-width-control').getBoundingClientRect().width - 30 
         scrollElement.scrollTop === 0 && (clipVideo(clipRatio) ,fixedVideo(clip_video_parent.getBoundingClientRect().top, clip_video_rect.height, 0))
         scrollFadeInit ()
+        !lottie_loaded && loadLottie()
+      }
+
+      function loadLottie () {
+        for (var i = 0, len = slides_satck.length; i < len; i++) {
+          if (slides_satck[i].getBoundingClientRect().top <= window_view.height ) {
+            lottie_loaded = true
+            getLottie()
+            return
+          }
+        }
+      }
+
+      function loadLazyImgs () {
+        lazy_imgs && lazy_imgs.forEach( function (el, index) {
+          var top = el.getBoundingClientRect().top
+          if (top <= window_view.height) {
+            el.src = el.getAttribute('data-src')
+            lazy_imgs.splice(index, 1)
+            lazy_imgs = lazy_imgs.length === 0 ? null : lazy_imgs
+          }
+        })
       }
       
-      var playList = [], listenList = []
+      var playList = [], listenList = [], lazy_imgs = []
       document.querySelectorAll('video.show-to-play').forEach( function (el) { playList.push(el) } )
+      document.querySelectorAll('.lazy-img').forEach( function (el) { lazy_imgs.push(el) } )
 
       function scrollFadeInit () {
         scroll_fade_in.length > 0 && scroll_fade_in[0].getBoundingClientRect().top <= window_view.height &&
@@ -993,7 +1023,7 @@
         } )
       }
       
-      loop(0, window_view.width, loopAnimation(document.documentElement, 10), function (previousScrollTop, scrollTop) {
+      loop(0, window_view.width, loopAnimation(null, 10), function (previousScrollTop, scrollTop) {
         clipVideo(clipRatio, clip_video_rect, scrollTop )
         
         var top = clip_video_parent.getBoundingClientRect().top
@@ -1010,6 +1040,8 @@
         })
 
         scrollFadeInit ()
+        loadLazyImgs()
+        !lottie_loaded && loadLottie()
       })
       //模拟滚动
       function loop(previousScrollTop, previousClientWidth, animaitonCallback, callback) {
@@ -1043,21 +1075,32 @@
         var start = start1 =  270, start2 = 90
         var gap = (360 / (1000 * duration)) * 16
         var btngap = (360 / (1000 * duration)) * 16
+
+        var main = document.querySelector('.bg-main'),
+            btns_1 = document.querySelectorAll('.gradient-1'), len_1 = btns_1.length,
+            btns_2 = document.querySelectorAll('.gradient-2, .gradient-3'), len_2 = btns_2.length
+
         return function () {
+          if (window_view.width < 992) return
           start += gap
           start1 += ((start1 >= 350 && start1 <= 380) || (start1 >= 520 && start1 <= 550) ) ? btngap / 10 : btngap
           start2 += ((start2 >= 170 && start2 <= 200) || (start2 >= 340 && start2 <= 370) ) ? btngap / 10 : btngap
           start = (start - 270) > 360 ? 270 : start
           start1 = (start1 - 270) > 360 ? 270 : start1
           start2 = (start2 - 90) > 360 ? 90 : start2
-          el.style.setProperty('--gradient-deg', start + 'deg')
-          el.style.setProperty('--btngradient-deg1', start1 + 'deg')
-          el.style.setProperty('--btngradient-deg2', start2 + 'deg')
+          main.style.setProperty('--gradient-deg', start + 'deg')
+          for (var i = 0; i < len_1; i++) {
+            btns_1[i].style.setProperty('--btngradient-deg1', start1 + 'deg')
+          }
+
+          for (var i = 0; i < len_2; i++) {
+            btns_2[i].style.setProperty('--btngradient-deg1', start1 + 'deg')
+          }
         }
       }
       //裁剪视频
       function clipVideo( limit, rect, scrollTop ) {
-        clip_video.paused && clip_video.play()
+        clip_video_player.paused && clip_video_player.play()
         scrollTop = scrollTop || scrollElement.scrollTop
         rect = rect || clip_video.getBoundingClientRect()
 
@@ -1082,7 +1125,10 @@
           clip_video.style.setProperty('--clip-h', left + 'px')
           clip_video.style.setProperty('--round', radius + 'px')
         }
-        clip_video.style.opacity = 1
+        !cliped && requestAnimationFrame ( function () {
+          clip_video.style.opacity = 1
+          cliped = true
+        } )
         ratio === 0 ? fade_in.classList.add('show') : fade_in.classList.remove('show')
       }
 
@@ -1099,47 +1145,6 @@
         fade_in.style.setProperty('--translate-y', top / 2)
       }
 
-      //控制视频放大及还原
-      function expandV ( el ) {
-        var video = el.children[0]
-        var rect = video.getBoundingClientRect()
-        var width = el.getBoundingClientRect().width
-
-        if(width === rect.width) {
-          fade_in_up.forEach ( function (el) {
-            el.classList.add('active')
-          } )
-          //fade_in_up.classList.add('active')
-          video.paused && video.play()
-        }
-
-        if(rect.top <= threshold && rect.width !== width) {
-          video.style.width = width + 'px'
-          fade_in_up.forEach ( function (el) {
-            el.classList.add('active')
-          } )
-          //fade_in_up.classList.add('active')
-          video.paused && video.addEventListener('transitionend', function () {
-            requestAnimationFrame ( function () {
-              video && video.play()
-              video = null
-            } )
-          })
-        }
-
-        if (rect.top > window_view.height && rect.width !== video_control_width) {
-          if (video.paused) return
-          video.style.width = video_control_width + 'px'
-          fade_in_up.forEach ( function (el) {
-            el.classList.remove('active')
-          } )
-          //fade_in_up.classList.remove('active')
-          var src = video.src
-          video.src = ''
-          video.src = src
-        }
-      }
-
       function getViewSize () {
         return {
           width: window.innerWidth || window.outerWidth,
@@ -1147,12 +1152,10 @@
         }
       }
 
-      getLottie()
       function getLottie() {
         if (isIE) return
         var observer = new MutationObserver(animation_loaded)
         var mutation_count = 0
-        var slides_satck = document.querySelectorAll('.lottie-video')
 
         if(slides_satck.length === 0) return
 
