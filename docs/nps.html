@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NPS 自动计算工具</title>
+
+  <link rel="stylesheet" href="http://www.npscalculator.com/Content/css?v=bwgbZmuRQA6i7xhNNK8A-WO-4Z54rTy9JKj_93FtzDI1">
+  <!-- <link rel="stylesheet" href="./imgs/content.css"> -->
+</head>
+  <style>
+    .file-contianer {
+      background-color: #fff;
+      border: 1px dashed #d9d9d9;
+      border-radius: 6px;
+      box-sizing: border-box;
+      width: 360px;
+      height: 180px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: auto;
+    }
+    .input-file {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      opacity: 0;
+      left: 0;
+      top: 0;
+    }
+  </style>
+<body>
+
+  <div class="container" id="nps_calculator" style="display: none;" :style="'display:block'">
+
+
+    <div class="page-body">
+      <div class="row">
+        <div class="col-xs-12">
+
+          <div class="npscalc NpsScreenshotHide">
+
+            <div style="text-align: center; padding: 50px 0;">
+              <div class="row align-items-center">
+                <div class="col-12">
+                  <div class="file-contianer" :title="instruction">
+                    <input class="input-file" type="file" @change="handleFileChange" accept=".xls,.xlsx" v-if="showFile">
+                    <div class="text">点击上传xls、xlsx文件</div>
+                  </div>
+                </div>
+                <!-- <div class="col-md-8"><img src="./imgs/Snipaste_2021-05-19_16-10-23.png" style="max-width: 100%;" alt=""></div> -->
+              </div>
+            </div>
+
+            <div class="container-fluid">
+              <form action="/en/Home/Save" method="post">
+                <div class="row">
+                  <div class="hidden-xs hidden-sm col-md-offset-2 col-lg-offset-2"><span><i
+                        class="fa fa-arrow-down fa-3x faa-bounce animated faa-fast" id="bouncingArrow"
+                        aria-hidden="true"></i></span></div>
+                  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 pull-right">
+                    <div>
+                      <h2 class="question">How likely is it you would recommend our company to a friend or colleague?
+                      </h2>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="row background" id="input">
+                  <div class="col-xs-12 col-sm-12 col-md-8 pull-right">
+                    <img  src="http://www.npscalculator.com/Content/img/nps.png"
+                      alt="Detractor, Passive &amp; Promoter" style="width:100%">
+                  </div>
+
+                  <div class="col-xs-12 col-sm-4 col-md-4">
+
+                    <div class=""><b class="formHeadline">Number of respondents</b></div>
+
+                    <div v-for="(val,key,index) in scores" class="input-group input-group-sm lblborder inputborder spanborder" :class=" key > 8 ? 'promoter' : key < 7 ? 'detractor' : 'neutral'">
+                      <label :for="'a' + key" class="input-group-addon" :id="'la' + key"><b>{{key}}</b></label>
+                      <input :value="val" pattern="[0-9]*" type="number" class="form-control modern" :name="'a' + key" :id="'a' + key"
+                        placeholder="" :aria-describedby="'la' + key" min="0" readonly :style="'background-size:' + (sum > 0 ? (val / sum * 100) : 0) + '% 100%'">
+                    </div>
+
+                  </div>
+
+                  <div class="col-xs-12 col-sm-4 col-md-4" :class="showResult ? '' : 'opacity04'" id="types">
+                    <div style="height: 210px" class="hidden-md hidden-lg  hidden-xs"></div>
+                    <div style="height: 61px" class="hidden-sm hidden-lg  hidden-xs"></div>
+                    <div style="height: 27px" class="hidden-sm hidden-md  hidden-xs"></div>
+                    <div class=""><b>Types</b></div>
+
+                    <input type="hidden" id="det" class="typetotal">
+                    <input type="hidden" id="neu" class="typetotal">
+                    <input type="hidden" id="pro" class="typetotal">
+                    <input type="hidden" id="sum">
+
+                    <div id="type0" class="input-group input-group-sm has-feedback lblborder inputborder spanborder">
+                      <label for="b0" class="input-group-addon" id="lb0"><abbr
+                          title="Detractors"><b>D</b></abbr></label>
+                      <input :value="sum > 0 ? (dScores / sum * 100).toFixed(2) : 0" type="text" class="form-control" name="b0" id="b0" placeholder=""
+                        aria-describedby="lb0" readonly :style="'background-size:' + (sum > 0 ? (dScores / sum * 100) : 0) + '% 100%'">
+                      <span class="input-group-addon"><b>%</b></span>
+
+                    </div>
+                    <div id="type1" class="input-group input-group-sm has-feedback lblborder inputborder spanborder">
+                      <label for="b1" class="input-group-addon" id="lb1"><abbr title="Neutrals"><b>N</b></abbr></label>
+                      <input :value="sum > 0 ? (nScores / sum * 100).toFixed(2) : 0" type="text" class="form-control" name="b1" id="b1" placeholder=""
+                        aria-describedby="lb1" readonly :style="'background-size:' + (sum > 0 ? (nScores / sum * 100) : 0) + '% 100%'">
+                      <span class="input-group-addon"><b>%</b></span>
+
+                    </div>
+                    <div id="type2" class="input-group input-group-sm has-feedback lblborder inputborder spanborder">
+                      <label for="b2" class="input-group-addon" id="lb2"><abbr title="Promoters"><b>P</b></abbr></label>
+                      <input :value="sum > 0 ? (pScores / sum * 100).toFixed(2) : 0" type="text" class="form-control" name="b2" id="b2" placeholder=""
+                        aria-describedby="lb2" readonly :style="'background-size:' + (sum > 0 ? (pScores / sum * 100) : 0) + '% 100%'">
+                      <span class="input-group-addon"><b>%</b></span>
+
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-4 col-md-4" :class="showResult ? '' : 'opacity04'" id="nps">
+                    <!-- Insert form here -->
+                    <div style="height: 0px" class="hidden-md hidden-lg  hidden-sm"></div>
+                    <div style="height: 240px" class="hidden-md hidden-lg  hidden-xs"></div>
+                    <div style="height: 91px" class="hidden-sm hidden-lg  hidden-xs"></div>
+                    <div style="height: 57px; " class="hidden-sm hidden-md  hidden-xs"></div>
+                    <div class=""><b>Result</b></div>
+                    <div class="input-group input-group-sm lblborder inputborder spanborder" :class=" result > 0 ? 'promoter' : 'detractor'">
+                      <label for="c1" class="input-group-addon" id="ca1"><abbr
+                          title="Net Promoter Score®"><b>NPS®</b></abbr></label>
+                      <input :value="result" readonly="readonly" type="number" class="form-control" id="c1" name="c1"
+                        placeholder="" aria-describedby="ca1" :style="'background-size:' + Math.abs(result) + '% 100%'">
+                        <span class="input-group-addon"><b>%</b></span>
+                    </div>
+
+                  </div>
+
+                </div>
+                <!-- </div>-->
+              </form>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <table class="table table-responsive-sm" style="margin-top: 50px; font-size: 18px;" v-show="showResult">
+      <thead>
+        <tr>
+          <th scope="col">分值</th>
+          <th scope="col">各分值填写人数</th>
+          <th scope="col">总分</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(val,key,index) in scores">
+          <td>{{key}}</td>
+          <td>{{val}}</td>
+          <td>{{val * key}}</td>
+        </tr>
+        <tr>
+          <td>总计</td>
+          <td>{{number}}</td>
+          <td>{{total}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <script src="https://neveragain.allstatics.com/2019/assets/vendor/vue.min.js"></script>
+  <script src="./imgs/xlsx.full.min.js"></script>
+  <script>
+    new Vue({
+      el: '#nps_calculator',
+      data() {
+        return {
+          scores: {
+            1:0,
+            2:0,
+            3:0,
+            4:0,
+            5:0,
+            6:0,
+            7:0,
+            8:0,
+            9:0,
+            10:0
+          },
+          showFile: true,
+          dScores: 0,
+          nScores: 0,
+          pScores: 0,
+          sum: 0,
+          number: 0,
+          total: 0,
+          showResult: false,
+          instruction: '将导出的数据表格nps得分一栏的顶部命名改为nps后上传即可'
+        }
+      },
+      computed: {
+
+        result: function () {
+          return ((this.pScores - this.dScores) / ( this.dScores + this.nScores + this.pScores ) * 100).toFixed(2)
+        }
+      },
+      methods: {
+        handleFileChange (e) {
+          this.showFile = false
+          let reader = new FileReader()
+          let file = e.target.files[0]
+          let nps = {}
+          reader.readAsBinaryString(file)
+
+          reader.onload = e => {
+            const data = e.target.result, zzexcel = XLSX.read(data, { type: 'binary' }), result = []
+            for (let i = 0; i < zzexcel.SheetNames.length; i++) {
+              const newData = XLSX.utils.sheet_to_json(zzexcel.Sheets[zzexcel.SheetNames[i]]);
+              result.push(...newData)
+            } 
+
+            this.showFile = true
+            
+            for ( let i = 1; i < 11; i++ ) {
+              nps[i] = 0
+            }
+            for ( let i = 1, len = result.length; i < len; i++ ) {
+              nps[result[i].nps] += 1
+            }
+            console.log(nps)
+            this.scores = nps
+            let n_number = 0, p_number = 0, d_number = 0, sum = 0, number = 0, total = 0
+            for ( let k in nps ) {
+              number += nps[k]
+              sum += (nps[k])
+              total += (nps[k] * k)
+              p_number += (+k >= 9 ? (nps[k] ) : 0)
+              d_number += (+k <= 6 ? (nps[k] ): 0)
+              n_number += ((+k > 6 && +k < 9) ? (nps[k] ): 0)
+            }
+
+            // console.log(sum)
+            // console.log(p_number)
+            // console.log(d_number)
+
+            this.dScores = d_number
+            this.nScores = n_number
+            this.pScores = p_number
+            this.sum = sum
+            this.number = number
+            this.total = total
+            //this.nps = (p_number - d_number) / sum * 100 + '%'
+
+            this.showResult = true
+          }
+        },
+
+        handleInput() {
+          console.log(666)
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
