@@ -13,14 +13,18 @@
     <demo></demo>
 
     <!-- <router-view></router-view> -->
+    <input type="file" @change="handleFileChange" v-if="showFile">
+
   </div>
 </template>
 
 <script>
+import XLSX, { read } from 'xlsx'
 import { ref,reactive } from 'vue'
 import com from './views/component1'
 import demo from './components/Alert/alert.js'
 const axios = require('axios')
+
 export default {
   name: 'App',
   components: {
@@ -30,7 +34,9 @@ export default {
   data() {
     let vm = this
     return {
-      obj: vm.getData()
+      obj: vm.getData(),
+      showFile: true,
+      nps: 0 //净推荐值(NPS)=(推荐者数/总样本数)×100%-(贬损者数/总样本数)×100%
     }
   },
   setup(props, context) {
@@ -64,6 +70,43 @@ export default {
     return { number, add, ipaddress }
   },
   methods: {
+    handleFileChange (e) {
+      this.showFile = false
+      let reader = new FileReader()
+      let file = e.target.files[0]
+      let nps = {}
+      reader.readAsBinaryString(file)
+
+      reader.onload = e => {
+        const data = e.target.result, zzexcel = XLSX.read(data, { type: 'binary' }), result = []
+        for (let i = 0; i < zzexcel.SheetNames.length; i++) {
+          const newData = XLSX.utils.sheet_to_json(zzexcel.Sheets[zzexcel.SheetNames[i]]);
+          result.push(...newData)
+        } 
+
+        this.showFile = true
+        
+        for ( let i = 1; i < 11; i++ ) {
+          nps[i] = 0
+        }
+        for ( let i = 1, len = result.length; i < len; i++ ) {
+          nps[result[i].nps] += 1
+        }
+        console.log(nps)
+        let sum = 0, r_number = 0, d_number = 0
+        for ( let k in nps ) {
+          sum += (nps[k] * +k)
+          r_number += (+k >= 9 ? (nps[k] * +k) : 0)
+          d_number += (+k <= 6 ? (nps[k] * +k): 0)
+        }
+
+        console.log(sum)
+        console.log(r_number)
+        console.log(d_number)
+
+        this.nps = (r_number - d_number) / sum * 100 + '%'
+      }
+    },
     sayHi(e) {
       console.log(e)
 
