@@ -1,0 +1,59 @@
+.ws-nps-input-wrapper {
+  position: relative;
+  .ws-nps__count {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    color: rgba(0, 0, 0, 0.48);
+    font-size: 12px;
+  }
+}
+  .ws-nps-input {
+    display: block;
+    resize: vertical;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #dcdfe6;
+    border-radius: 5px;
+    overflow: auto;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    &:focus {
+      outline: none;
+      border-color: #007BFF;
+    }
+    &::placeholder { color: rgba(0, 0, 0, .5); }
+  }
+  .ws-nps-button {
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    background: #007BFF;
+    border: 1px solid #007BFF;
+    color: #fff;
+    -webkit-appearance: none;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    transition: .1s;
+    font-weight: 500;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 12px 30px;
+    font-size: 14px;
+    font-family: inherit;
+    border-radius: 4px;
+    &:hover {
+      background: #409eff;
+      border-color: #409eff;
+    }
+    &.disabled {
+      cursor: not-allowed;
+    }
+  }
