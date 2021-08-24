@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MVVM简单实现</title>
+</head>
+<body>
+  <div id="mvvm">
+    <input type="text" y-model="msg">
+    <p>{{msg}}</p>
+    <button y-click="handleClik">点我</button>
+  </div>
+
+  <script>
+    class Dep {
+      constructor() {
+        this.subs = []
+      }
+
+      add(sub) {
+        this.subs.push(sub)
+      }
+
+      notify() {
+        this.subs.forEach(sub => sub.update())
+      }
+    }
+
+    class Watcher {
+      constructor(vm,cb) {
+        this.vm = vm
+        this.cb = cb
+
+        cb.call(vm)
+      }
+
+      update() {
+        this.cb.call(this.vm)
+      }
+
+    }
+
+    class Observer {
+      constructor (data, vm) {
+
+        vm.dep = new Dep()
+
+        vm._data = new Proxy(data, {
+          get: function(target, propkey) {
+            return target[propkey]
+          },
+          set: function(target, propkey, value) {
+            if ( target[propkey] === value ) return true
+            target[propkey] = value
+            vm.dep.notify()
+            return true
+          }
+        })
+
+      }
+    }
+
+    class Compile {
+      constructor(el, vm) {
+        this.$el = el
+        this.$vm = vm
+
+        this.init()
+      }
+
+      init() {
+
+        [].slice.call(this.$el.children).forEach(node => {
+          let text = node.textContent
+          let reg = /\{\{(.*)\}\}/
+
+          if (reg.test(text)) {
+            let key = reg.exec(text)[1]
+            this.$vm.dep.add(new Watcher(this.$vm, () => node.innerText = this.$vm[key]))     
+          }
+
+          if (node.getAttribute('y-model')) {
+            let modelKey = node.getAttribute('y-model')
+
+            node.addEventListener('input', e => {
+              this.$vm[modelKey] = e.target.value
+            })
+            this.$vm.dep.add( new Watcher(this.$vm, () => node.value = this.$vm[modelKey] ) )
+            node.removeAttribute('y-model')
+          }
+
+          if (node.getAttribute('y-click')) {
+            let eventKey = node.getAttribute('y-click')
+
+            node.addEventListener('click', this.$vm[eventKey].bind(this.$vm), false)
+
+            node.removeAttribute('y-click')
+          }
+        })
+      }
+    }
+
+    const Mvvm = function(options) {
+      this.$options = options
+      const el = document.querySelector(this.$options.el)
+
+      const _proxy = {...options.data, ...options.methods}
+      const vm = this
+
+      Object.keys(_proxy).forEach(key => {
+        Object.defineProperty(vm, key, {
+          get() {
+            return vm._data[key] || vm.$options.methods[key]
+          },
+          set(val, oldVal) {
+            if (oldVal === val) return
+            vm._data[key] = val
+          }
+        })
+      })
+      
+      new Observer(this.$options.data, this)
+      new Compile(el, this)
+    }
+
+    const vm = new Mvvm({
+      el: '#mvvm',
+      data: {
+        msg: 'hello world!'
+      },
+      methods: {
+        handleClik() {
+          this.msg = 'hahhahahha'
+        }
+      },
+    })
+
+  </script>
+</body>
+</html>
